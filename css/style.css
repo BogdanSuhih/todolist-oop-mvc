@@ -1,0 +1,30 @@
+body {
+    background-color: #1c1c1c
+}
+
+.wrapper {
+    margin: 50px auto;
+    width: 50%;
+}
+form {
+    background: #232324;
+    border: 3px solid #363636;
+    border-radius: 10px;
+    padding: 20px 10px;
+}
+#text_input{
+    width: 90%;
+}
+#list {
+    width: 60%;
+    float: left; 
+    margin-right: 5%;
+}
+h1 {
+    color: #d9d9d9;
+} 
+.action_btn {
+    color: red;
+    font-family: monospace;
+    font-weight: bold;
+}
