@@ -1,29 +1,40 @@
 <?php
-spl_autoload_register(function (string $className) {
-    require_once __DIR__ . '\\' . $className . '.php';
-});
-require_once 'connection.php';
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\style.css">
+try {
+    spl_autoload_register(function (string $className) {
+        require_once __DIR__ . '\\' . $className . '.php';
+    });
+
+    $route = $_GET['route'] ?? '';
+    $routes = require __DIR__ . '/Project/routes.php';
+    $isRouteFound = false;
+
     
-    <title>TODO</title>
-</head>
-<body>
-    <div class="wrapper">
-        <form action="" method="POST" autocomplete="off">
-            <div>
-                <input type="text" name="" id="text_input">
-                <input type="submit" value="Add" class = "action_btn">
-            </div>
-            <input type="hidden" name="">
-        </form>
-    </div>
-</body>
-</html>
+
+    foreach ($routes as $pattern => $controllerAndAction) {
+        preg_match($pattern, $route, $matches);
+        if (!empty($matches)) {
+            $isRouteFound = true;
+            break;
+        }
+    }
+    if (!$isRouteFound) {
+        throw new \Project\Exceptions\RouteException('Такого адреса не существует!');
+    }
+    unset($matches[0]);
+
+    $controllerName = $controllerAndAction[0];
+    $actionName = $controllerAndAction[1];
+    $controller = new $controllerName();
+    $controller->$actionName(...$matches);
+} catch (\Project\Exceptions\DbException $ex) {
+    $obj = new \Project\Views\View(__DIR__ . '/templates/');
+    $obj->renderTemplate('errors/500.php', ['error' => $ex->getMessage(), 'title' => 'DB Error'], 500);
+} catch (\Project\Exceptions\RouteException $ex) {
+    $obj = new \Project\Views\View(__DIR__ . '/templates/');
+    $obj->renderTemplate(
+        'errors/401.php',
+        ['error' => $ex->getMessage(), 'title' => 'Not found'],
+        404
+    );
+}
