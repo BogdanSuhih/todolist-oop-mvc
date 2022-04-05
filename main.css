@@ -1,103 +1,138 @@
-body,html {
+html,body{
     height: 100%;
+    width: 100%;
     margin: 0;
 }
-
 body {
     display: flex;
     flex-direction: column;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
 main {
     flex: 1;
     padding: 30px;
 }
-
 header, footer {
     padding: 5px 30px;
     flex: 0 0 auto;
     background-color:rgb(123, 123, 163);
 }
-
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-ul {
+nav ul {
     list-style-type: none;
     padding-inline-start: 0px;
     margin: 0;
     display: flex;
     
 }
-
 a {
-    text-decoration: none;
-    color: black;
+    color: rgb(0,0,238);
 }
 nav a {
     font-weight: 700;
     flex-direction: row;
+    text-decoration: none;
+    color: black;
 }
-li {
+nav li {
     margin: 10px;
 }
 .form_wrapper {
     margin: 0 auto;
     width: min-content;
 }
+.form_wrapper input{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.btn{
+    margin:10px 0;
+}
 .error {
     color: red;
     background-color: darkkhaki;
+    text-align: center;
 }
 .reg_error {
     color: red;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-.block_todo, .block_welcome *{
-    width: fit-content;
+.instruction{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.block_todo,
+.block_welcome *,
+.add_todo {
+    width:80%;
     margin:0 auto;
+    text-align: center;
 }
 .block_todo {
     float: right;
 }
-
 .block_main  {
-    width: fit-content;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content:flex-start;
     align-items: center;
+    max-width: 900px;
+    height: 100%;
+}
+table {
+    margin: 0 auto;
+}
+td {
+    padding: 5px;
+}
+.task {
+    text-align: start;
 }
 .main_footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.icon-add::before {
-    content: 'icons\Tilda_Icons_27bu_6.svg';
-}
-.add {
-    width: 400px; /* Ширина поля с кнопкой */
+.block_input {
+    min-width: 300px;
     border-radius: 5%;
-    border: 2px solid #000; /* Параметры рамки */
-    min-height: 30px; /* Минимальная высота */
+    border: 3px solid #000;
+    min-height: 30px;
+    margin-bottom: 30px;
 }
-.add > input[type="text"] {
-    border: none; /* Убираем рамку */
-    outline: none; /* Убираем свечение в Chrome и Safari */
-    -webkit-appearance: none; /* Убираем рамку в Chrome и Safari */
-    width: 364px; /* Ширина поля */
-    vertical-align: middle; /* Выравнивание по середине */
+.block_input > input[type="text"] {
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    width: 85%;
+    vertical-align: middle;
+    padding: 5px;
 }
-input[type="submit"] {
-    width: 30px; /* Ширина кнопки */
-    height: 30px; /* Высота кнопки */
-    border: none; /* Убираем рамку */
+.action_btn{
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
     float: right;
-    background: url("icons/203791307.png") no-repeat 50% 50%; /* Параметры фона */
+    background: url("icons/203791307.png") no-repeat 50% 50%;
+}
+.actions > a{
+    text-align: center;
+    display: block;
+}
+.delete{
+    color:red;
+}
+.edit{
+    color:green;
 }

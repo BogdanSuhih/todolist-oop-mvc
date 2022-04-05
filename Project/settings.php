@@ -3,7 +3,7 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'dbname' => 'todo_db',
+        'dbname' => 'your_db_name',
         'user' => 'root',
         'password' => ''
     ]

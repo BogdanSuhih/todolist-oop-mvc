@@ -52,22 +52,20 @@ class Todo extends AbstractActiveRecord
         return $entities;
     }
 
-    /*  public static function updateTodoById(array $data): bool
-    {
-        $columnsName = '`id`, `text`, `is_done`';
-        $values = ':authorId, :text';
-        $whereClause = '';
-        $params = [':authorId' =>  $data['user_id'], ':text' => $data['todo']];
-        // 'UPDATE`'.static::getTableName().'` SET `'.$columnName . '` = '."'".$value."' ".$whereClause.';',
-
-        return self::updateRecord($columnsName, $values, $whereClause, $params);
-    } */
-
     public static function deleteById(int $id): bool
     {
         $whereClause = 'WHERE `id` = :id';
         $params = [':id' => $id];
         return self::deleteRecord($whereClause, $params);
+    }
+
+    public static function updateTodoById(array $data): bool
+    {
+        $columnName = 'text';
+        $value = $data['todo'];
+        $id = $data['todo_id'];
+
+        return self::updateById($id, $columnName, $value);
     }
 
     protected static function getTableName(): string

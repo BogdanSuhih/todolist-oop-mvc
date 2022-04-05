@@ -5,6 +5,7 @@ namespace Project\Models\Users;
 use Project\Models\AbstractActiveRecord;
 use Project\Services\Db;
 use Project\Exceptions\UserException;
+use Project\Exceptions\DbException;
 
 class User extends AbstractActiveRecord
 {
@@ -48,11 +49,10 @@ class User extends AbstractActiveRecord
             throw new UserException('Пользователь с таким никнейм уже существует');
         } if (self::getByEmail($userData['email'])) {
             throw new UserException('Пользователь с таким e-mail уже существует');
+        } if (!self::createRecord($columns, $values, $userData)) {
+            throw new DbException('Ошибка регистрации пользователя');
         }
-
-        $userExist = self::createRecord($columns, $values, $userData);
-        
-        return $userExist ? self::getByEmail($userData['email']) : null;
+        return self::getByEmail($userData['email']);
     }
 
     public static function checkAuthUser(array $data)

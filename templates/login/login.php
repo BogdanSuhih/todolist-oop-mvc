@@ -6,7 +6,7 @@
 <div class="form_wrapper auth-form">
     <h1>Авторизация</h1>
     <hr>
-    <form action="login" method="post">
+    <form action="login" method="post" autocomplete="off">
         <div class="form_group">
             <label for="email" class="required">Email</label>
             <input
@@ -14,7 +14,6 @@
             name="email"
             id="email"
             value="<?= $_POST["email"]??"" ?>"
-            
             />
         </div>
         <div class="form_group">

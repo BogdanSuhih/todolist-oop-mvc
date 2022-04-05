@@ -5,9 +5,9 @@
 <?php endif; ?>
 
 <div class="form_wrapper reg_form">
-    <h1>Зарегистрируйтесь</h1>
+    <h1>Регистрация</h1>
     <hr>
-    <form action="register" method="post">
+    <form action="register" method="post" autocomplete="off">
         <div class="form_group">
             <label for="nickname" class="required">Никнейм</label>
             <input type="text" name="nickname" id="nickname"  value="<?= $_POST["nickname"]??"" ?>"/>
@@ -30,11 +30,9 @@
             <input type="submit" value="Зарегистрироваться">
         </div>
         <?php if ($msg??'') :?>
-        <span class="reg_error"><?= $msg ?></span>
+        <div class="reg_error"><?= $msg ?></div>
         <?php endif; ?>
-
-    </form>
-    <span>У меня уже есть аккаунт! <a href="login">Войти</a></span>
+    </form>    
 </div>
 
 

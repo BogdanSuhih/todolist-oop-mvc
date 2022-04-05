@@ -45,7 +45,7 @@ abstract class AbstractActiveRecord
         return $entities ? $entities[0] : null;
     }
 
-    protected static function updateById(int $id, string $columnName, string $value): bool
+    protected static function updateById(int $id, string $columnName, $value): bool
     {
         return static::updateRecord(
             $columnName,
@@ -89,9 +89,10 @@ abstract class AbstractActiveRecord
         string $whereClause = '',
         array $params = []
     ): bool {
+        $params = array_merge($params, [':value' => $value]);
         $db = Db::getInstanse();
         $result = $db->query(
-            'UPDATE`'.static::getTableName().'` SET `'.$columnName . '` = '."'".$value."' ".$whereClause.';',
+            'UPDATE `'.static::getTableName().'` SET `'.$columnName . '` = :value '.$whereClause.';',
             $params
         );
         return is_array($result);

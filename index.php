@@ -29,7 +29,12 @@ try {
     $controller->$actionName(...$matches);
 } catch (\Project\Exceptions\DbException $ex) {
     $obj = new \Project\Views\View(__DIR__ . '/templates/');
-    $obj->renderTemplate('errors/500.php', ['error' => $ex->getMessage(), 'title' => 'DB Error'], 500);
+    $obj->renderTemplate(
+        'errors/500.php',
+        ['error' => $ex->getMessage(),
+        'title' => 'DB Error'],
+        500
+    );
 } catch (\Project\Exceptions\RouteException $ex) {
     $obj = new \Project\Views\View(__DIR__ . '/templates/');
     $obj->renderTemplate(
